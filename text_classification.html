@@ -34,23 +34,25 @@
 										<h1>Text Classification</h1>
 									</header>
 
-									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+									<span class="image main"><img src="images/arrows.jpg" alt="" /></span>
 
 									<hr class="major" />
 
 									<h2>Overview</h2>
 									<p>Find code <a href="https://github.com/uazhlt-ms-program/ling-539-class-competition-code-nkrbrock/blob/main/main.py">here</a>.</p>
-									<p>Description. </p>
-									<p>Description.</p>
+									
+									<p>The general task is relatively simple, is a given text a positive movie review or a negative one. However, problems quickly arise with a quick glance at the training data, because many of the entries aren't movie reviews at all. Instead, there is a lot of noise in the form of reviews for other products, emojicons, empty fields, and many more. The data is even more convoluted given the fact that there are a few entries written in other languages. So, the ultimate goal of this program is to categorize a piece of text as either NOT a movie review, a POSITIVE movie review, or a NEGATIVE movie review. </p>
+									
+									<h2>Approach</h2>
+									<p>The very first thing that we had to do was get all of the reviews and their respective category into a format that would be easy to handle. Due to the various characters that appeared in the text, the encoding had to be specified to UTF-8 to avoid any errors from popping up. Once the process of reading the reviews started, I wanted to make sure that the data was normalized in some way. Because there were some reviews that included things like emojicons or punctuation that I thought clarified the category, I decided to leave most of the punctuation in. What I did decide to remove however were HTML markers. This is due to the fact that said markers are only concerned with format and not content. This includes tags such as"br" and other tags that appear in the middle of <> as well as notations such as "\n". I also split contractions from their root word such that: wouldn't → would n't. This would ensure that there would not be more unique tokens than I thought was necessary. I also made sure that everything was converted into lower case. Although "I HATED THIS MOVIE" and "i hated this movie" may differ in degree of how much an individual disliked a film, the word choice clearly conveys enough information for the task at hand.</p>
+									<p>For this initial runthrough I'm deciding to leave in the non-English reviews as well as the empty fields, but this may change in the future.</p>
+									<p>Once this relatively simple normalization processed was finished, I appended a tuple consisting of the now clean review along with the category it belonged to in a list. This list was then randomized to ensure that both the training and validation data received some of every category. The data was then split 80/20 into training and validation data since there is a seperate file for test data.</p>
+									<p>For the actual model itself I used logistic regression. The model worked with both monograms and bigrams. For the classifier, it turns out that after some experimenting that changing the value for C is detrimental for this dataset, so the default was left alone. The max_iter was also set to 1000 since the model could not run on the default value. Adding a random state was also shown to produce a small increase in overall performance. The lover was changed to liblinear and the multi_class variable was set to ovr, but it does not appear that these greatly increased the system's performance.</p>
+
+									<h2>Results</h2>
+									<p>As of my most recent run of this program, I was able to reach an F1 and an accuracy score of 89.6% on my validation data. This is by no means perfect, but much better than I anticipated considering how this is multiclass and not just a biclass classifier.</p>
 
 									<hr class="major" />
-
-									<h2>Code</h2>
-									<p>Description. </p>
-									<p>Put code block here.</p>
-
-									<hr class="major" />
-
 								</section>
 
 						</div>

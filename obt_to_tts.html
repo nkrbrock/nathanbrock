@@ -34,14 +34,32 @@
 										<h1>Oral Bible Translation to Text-to-Speech</h1>
 									</header>
 
-									<span class="image main"><img src="images/pic11.jpg" alt="" /></span>
+									<span class="image main"><img src="images/speech_bubble.jpg" alt="" /></span>
 
 									<hr class="major" />
 
 									<h2>Overview</h2>
 									<p>Find code <a href="https://github.com/sil-ai/nathan-internship-2022.git">here</a>.</p>
-									<p>Description. </p>
-									<p>Description.</p>
+									<p>The purpose of this project is to convert an audio Bible along with its written transcript into a Coqui-TTS system. This task can be split up into 4 main areas: </p>
+									<ul>
+										<li>Preprocessing. This was by far the most complicated part of the process to figure out. In order to automate this process with ClearML, preprocessing needed to be broken down into multiple steps:</li>
+											<ul>
+												<li>Download and extract the audio files that the user needs into a designated folder.</li>
+												<li>Split the biblical text into chapters and assign them names that align with MFA standards.</li>
+												<li>Create a phonetic dictionary text file that contains word-pronunciation pairs with each sound separated as required by MFA. ie calm k a l m</li>
+												<li>Clean up the audio and place it in the same folder as the split biblical text.</li>
+											</ul>
+										<li>Montreal Forced Aligner</li>
+										<li>Convert data for Coqui</li>
+											<ul>
+												<li>Takes the .textgrid files that MFA produced, and extracts the phonemic data to create a csv file that has one line per audio file title with its transcript. i.e. GEN_001.wav|ni...</li>
+											</ul>
+										<li>Coqui-TTS</li>
+											<ul>
+												<li>This uses the metadata.csv along with the audio file to train a Coqui-TTS model. Current model is GlowTTS, but may change in the future depending on results.</li>
+											</ul>
+									</ul>
+									
 
 									<hr class="major" />
 
